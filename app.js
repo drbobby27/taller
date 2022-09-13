@@ -1,9 +1,12 @@
 const app = new Vue({
     el: '#app',
     data: {
-
+        prueba: 0,
         Bodega1: 100000,
         Bodega2: 230000,
+        acumuladoBodega1: 0,
+        acumuladoBodega2: 0,
+        pesoEnKgs: 0,
         OpcionesBodega: ['Bodega1', 'Bodega2'],
         OpcionesPeso: ['kilo', 'libra', 'gramos'],
         dataBodegas: [],
@@ -15,35 +18,48 @@ const app = new Vue({
         grs:1,
         calculoInventario: "",
         alerta:"",
-        totalVentas: "",
         errors: false
 
     },
     methods: {
-        getIndex(evt) {
-            this.index = evt.target.selectedIndex;
-            
-          },
+        
         agregar(){
+            this.acumuladorValues()
+           
             this.dataBodegas.push(
                 {
                     bodega: this.defaultBodega ,
                     cantidad: this.cantidad,
-                    tipo:this.defaultPeso
-
+                    tipo:this.defaultPeso,
+                    convertKg: this.prueba
                 }
             )
+            this.limpiar()   
+            
+            console.log(this.dataBodegas);
+            
         },
-        conversion(data){
-            if(data.bodega === 'gramos') {
-                return data
+        acumuladorValues(){
+            if(this.defaultBodega === 'Bodega1'){
+                this.acumuladoBodega1 += this.conversionValues
+            }else{
+                this.acumuladoBodega2 += this.conversionValues
             }
-            if(data.bodega === 'libra') {
-                return data.tipo * .5
+        },
+        limpiar(){
+            this.defaultBodega= null,
+            this.defaultPeso= null,
+            this.cantidad = ""
+        },
+        conversionValues(data){
+            if(data.tipo === 'gramos' ) {
+                return  this.prueba = data.cantidad / 1000
             }
-              
+            if(data.tipo === 'libra') {
+                return this.prueba =data.cantidad * .5
+            }
             else {
-                console.log('Ready');
+                return this.prueba =data.cantidad
             }
               
                
