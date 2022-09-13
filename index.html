@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
+      crossorigin="anonymous"
+    />
+    <title>Store App</title>
+  </head>
+  <body>
+    <div id="app" class="container">
+      <h5 class="mt-4 mb-2 text-muted">Store App</h5>
+      <hr />
+
+      <div class="container">
+        <div class="row">
+          <div class="col-3">
+            <input
+              class="ms-0 text-center rounded-1"
+              type="number"
+              placeholder="Inserte una cantidad..."
+              v-model.number="cantidad"
+            />
+            <span class="error d-none" style="color: red" v-if="errors"
+              >Cantidad</span
+            >
+          </div>
+
+          <div class="col-3">
+            <select
+              @input="getIndex($event)"
+              v-model="defaultBodega"
+              class="col-12 rounded-1 text-center bg-light"
+            >
+              <option
+                v-for="(item,i) in OpcionesPeso"
+                v-text="item"
+                class="rounded-4 text-center"
+              ></option>
+            </select>
+            
+            <span class="error text-center d-none" style="color: red" 
+              >Select some category</span
+            >
+          </div>
+
+          
+          <div class="col-3">
+            <select
+              @input="getIndex($event)"
+              v-model="defaultPeso"
+              class="col-12 rounded-1 text-center bg-light"
+            >
+              <option
+                v-for="(item,i) in OpcionesBodega"
+                v-text="item"
+                class="rounded-4 text-center"
+              ></option>
+            </select>
+
+            <span class="error text-center d-none" style="color: red" 
+              >Select some category</span
+            >
+          </div>
+
+          <button
+            class="col-1 btn btn-danger text-white text-center"
+            @click="agregar"
+            style="height: 30px"
+          >
+            Comprar
+          </button>
+        </div>
+      </div>
+
+      <table class="table mt-4">
+        <thead>
+          <tr
+            style="background: rgb(210, 120, 104)"
+            class="text-center text-white"
+          >
+            <th scope="col">Item</th>
+            <th scope="col">Bodega</th>
+            <th scope="col">Cantidad</th>
+            <th scope="col">Tipo</th>
+            <th scope="col">Total en kg</th>
+            
+          </tr>
+        </thead>
+        <tbody >
+          <tr
+            style="background: rgb(232, 220, 220)"
+            class="text-center text-dark"
+           v-for="(item, i ) in dataBodegas"
+          >
+            <td  v-text="i + 1"></td>
+            <td v-text="item.tipo" ></td>
+            <td v-text="item.cantidad"></td>
+            <td v-text="item.bodega" ></td>
+            <td v-text="conversion(item)" ></td>
+              
+          </tr>
+        </tbody>
+
+      </table>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+    <script src="./app.js"></script>
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+      integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+      integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
