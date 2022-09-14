@@ -12,7 +12,6 @@ const app = new Vue({
         defaultBodega: null,
         defaultPeso: null,
         cantidad: "",
-        calculoInventario: "",
         alerta:"",
         errors: false
     },
@@ -20,7 +19,6 @@ const app = new Vue({
         agregar(){
             if(this.cantidad === "" || this.cantidad < 1 || this.defaultBodega === null  || this.defaultPeso === null)  {
                 this.errors = true;
-                // alert(this.errors)
             } else {
                 this.dataBodegas.push(
                     {
