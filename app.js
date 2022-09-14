@@ -29,12 +29,20 @@ const app = new Vue({
                     conversion: this.conversionValues()
                 }
             )
-            console.log(this.dataBodegas);
+            this.acumulador()
+            
+            console.log(this.dataBodegas)
+            console.log(`[conversion]: ${this.conversionValues()}`)
+
             this.limpiar()   
            
         },
         acumulador(){
-          let bode1 =  this.dataBodegas.bodega
+          if(this.defaultBodega === 'Bodega1') {
+                this.acumuladoBodega1 += this.conversionValues()
+          } else{
+                this.acumuladoBodega2 += this.conversionValues()
+          }
         },        
         limpiar(){
             this.defaultBodega= null,
