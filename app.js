@@ -47,7 +47,8 @@ const app = new Vue({
         limpiar(){
             this.defaultBodega= null,
             this.defaultPeso= null,
-            this.cantidad = ""
+            this.cantidad = "",
+            this.errors = false
         },
         conversionValues(){
             if(this.defaultPeso === 'gramos' ) {
