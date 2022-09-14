@@ -1,7 +1,6 @@
 const app = new Vue({
     el: '#app',
     data: {
-        prueba: 0,
         Bodega1: 100000,
         Bodega2: 230000,
         acumuladoBodega1: 0,
@@ -13,9 +12,6 @@ const app = new Vue({
         defaultBodega: null,
         defaultPeso: null,
         cantidad: "",
-        kgs: 1000,
-        lbs: 500,
-        grs:1,
         calculoInventario: "",
         alerta:"",
         errors: false
@@ -24,42 +20,36 @@ const app = new Vue({
     methods: {
         
         agregar(){
-            this.acumuladorValues()
-           
+            
             this.dataBodegas.push(
                 {
                     bodega: this.defaultBodega ,
                     cantidad: this.cantidad,
                     tipo:this.defaultPeso,
-                    convertKg: this.prueba
+                    conversion: this.conversionValues()
                 }
             )
-            this.limpiar()   
-            
             console.log(this.dataBodegas);
-            
+            this.limpiar()   
+           
         },
-        acumuladorValues(){
-            if(this.defaultBodega === 'Bodega1'){
-                this.acumuladoBodega1 += this.conversionValues
-            }else{
-                this.acumuladoBodega2 += this.conversionValues
-            }
-        },
+        acumulador(){
+          let bode1 =  this.dataBodegas.bodega
+        },        
         limpiar(){
             this.defaultBodega= null,
             this.defaultPeso= null,
             this.cantidad = ""
         },
-        conversionValues(data){
-            if(data.tipo === 'gramos' ) {
-                return  this.prueba = data.cantidad / 1000
+        conversionValues(){
+            if(this.defaultPeso === 'gramos' ) {
+                return  this.cantidad / 1000
             }
-            if(data.tipo === 'libra') {
-                return this.prueba =data.cantidad * .5
+            if(this.defaultPeso === 'libra') {
+                return  this.cantidad * .5
             }
             else {
-                return this.prueba =data.cantidad
+                return this.cantidad
             }
               
                
